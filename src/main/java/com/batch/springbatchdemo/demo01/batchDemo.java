@@ -15,6 +15,8 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * @author zbhou  on  2021/9/11 9:31
+ * 01- jobBuilderFactory,stepBuilderFactory 组件
+ * 02- tasklet方法
  */
 
 @Configuration
@@ -42,6 +44,17 @@ public class batchDemo {
             @Override
             public RepeatStatus execute(StepContribution stepContribution, ChunkContext chunkContext) throws Exception {
                 System.out.println("step01");
+                return null;
+            }
+        }).build();
+    }
+
+    @Bean
+    public Step step02(){
+        return stepBuilderFactory.get("step02").tasklet(new Tasklet() {
+            @Override
+            public RepeatStatus execute(StepContribution stepContribution, ChunkContext chunkContext) throws Exception {
+                System.out.println("step02");
                 return null;
             }
         }).build();
